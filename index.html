@@ -1,18 +1,117 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- DLP GA4 Tracking — Engineer Book Landing Page -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NR05C7B09B"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ dataLayer.push(arguments); }
+
   gtag('js', new Date());
 
-  gtag('config', 'G-NR05C7B09B');
+  gtag('config', 'G-NR05C7B09B', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+
+  function trackDLPEvent(eventName, params){
+    if (typeof gtag !== "function") return;
+
+    gtag("event", eventName, Object.assign({
+      event_category: "Engineer Book Landing Page",
+      page_name: "engineer_book_landing",
+      page_title: document.title,
+      page_url: window.location.href,
+      hostname: window.location.hostname,
+      product: "engineer_officer_interview_mastery",
+      transport_type: "beacon"
+    }, params || {}));
+  }
+
+  trackDLPEvent("dlp_engineer_home_loaded", {
+    event_label: "Engineer book landing page loaded"
+  });
+
+  function scrollToOrder(source){
+    trackDLPEvent("engineer_book_order_section_click", {
+      event_label: "Scroll to order section",
+      button_source: source || "unknown"
+    });
+
+    var order = document.getElementById("order");
+    if(order) order.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function openTracked(url, eventName, source){
+    trackDLPEvent(eventName || "engineer_book_external_link_click", {
+      event_label: source || url,
+      button_source: source || "unknown",
+      link_url: url
+    });
+
+    window.open(url, "_blank", "noopener");
+  }
+
+  (function setupEngineerTracking(){
+    var scrollMarks = {25:false, 50:false, 75:false, 90:false};
+
+    function trackScrollDepth(){
+      var doc = document.documentElement;
+      var body = document.body;
+      var scrollTop = window.scrollY || doc.scrollTop || body.scrollTop || 0;
+      var docHeight = Math.max(
+        body.scrollHeight, doc.scrollHeight,
+        body.offsetHeight, doc.offsetHeight,
+        body.clientHeight, doc.clientHeight
+      );
+      var winHeight = window.innerHeight || doc.clientHeight || 0;
+      var scrollable = Math.max(docHeight - winHeight, 1);
+      var percent = Math.round((scrollTop / scrollable) * 100);
+
+      [25, 50, 75, 90].forEach(function(mark){
+        if(!scrollMarks[mark] && percent >= mark){
+          scrollMarks[mark] = true;
+          trackDLPEvent("engineer_book_scroll_" + mark, {
+            event_category: "Scroll Depth",
+            scroll_depth: mark
+          });
+        }
+      });
+    }
+
+    window.addEventListener("scroll", trackScrollDepth, { passive: true });
+
+    document.addEventListener("click", function(event){
+      var link = event.target.closest ? event.target.closest("a") : null;
+      if(!link) return;
+
+      var href = link.getAttribute("href") || "";
+      var text = (link.innerText || "").trim();
+
+      if(href.startsWith("mailto:")){
+        trackDLPEvent("engineer_book_email_click", {
+          event_category: "Contact",
+          event_label: text || "Email click",
+          link_url: href
+        });
+      }
+
+      if(href.charAt(0) === "#"){
+        trackDLPEvent("engineer_book_internal_anchor_click", {
+          event_category: "Navigation",
+          event_label: text || href,
+          anchor: href
+        });
+      }
+    });
+  })();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interview Mastery untuk Marine Engineer — Daily Loker Pelaut</title>
+<!-- DLP Engineer GA Ready: 2026-05-04 -->
 <meta name="description" content="Panduan lengkap interview dan career strategy untuk Marine Engineer Indonesia. Dari 4E hingga CE. Pre-order Rp 199.000 — dikirim 10 Mei 2026.">
 <meta property="og:title" content="Interview Mastery untuk Marine Engineer — Daily Loker Pelaut">
 <meta property="og:description" content="Kamu tahu jawabannya. Tapi begitu ditanya — tiba-tiba nge-blank. Panduan lengkap interview untuk Marine Engineer Indonesia. Pre-order sekarang Rp 199.000.">
@@ -277,7 +376,7 @@ img{display:block;max-width:100%}
     </div>
     <p class="hero-until">Harga pre-order berlaku sampai 10 Mei 2026</p>
 
-    <button class="cta-main" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Pre-Order Sekarang — Rp 199.000 →</button>
+    <button class="cta-main" onclick="scrollToOrder('hero_preorder_button')">Pre-Order Sekarang — Rp 199.000 →</button>
     <a href="#isi" class="cta-soft">Lihat dulu apa isi bukunya →</a>
     <p class="hero-sub-note">Buku fisik · Dikirim mulai 10 Mei 2026 · Bebas ongkir pre-order</p>
   </div>
@@ -630,7 +729,7 @@ img{display:block;max-width:100%}
       </div>
 
       <!-- PRIMARY: LYNK.ID -->
-      <button class="cta-main" style="margin-top:16px" onclick="window.open('https://lynk.id/dailylokerpelautmerchandise','_blank')">Pre-Order via Lynk.id — Rp 199.000 →</button>
+      <button class="cta-main" style="margin-top:16px" onclick="openTracked('https://lynk.id/dailylokerpelautmerchandise','engineer_book_lynk_click','lynk_preorder_button')">Pre-Order via Lynk.id — Rp 199.000 →</button>
       <p style="font-size:13px;color:#7a90a4;text-align:center;margin-top:8px">QRIS · Virtual Account · e-Wallet · Kartu Kredit</p>
 
       <!-- DIVIDER -->
@@ -642,11 +741,11 @@ img{display:block;max-width:100%}
 
       <!-- MARKETPLACE -->
       <div class="mkt-grid">
-        <button class="mkt-btn" onclick="window.open('https://id.shp.ee/br73rhs','_blank')" onmouseover="this.style.borderColor='#ee4d2d';this.style.background='#fff9f8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
+        <button class="mkt-btn" onclick="openTracked('https://id.shp.ee/br73rhs','engineer_book_shopee_click','shopee_button')" onmouseover="this.style.borderColor='#ee4d2d';this.style.background='#fff9f8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
           <p class="mkt-name" style="color:#ee4d2d">Shopee</p>
           <p class="mkt-note">Gratis ongkir · COD tersedia</p>
         </button>
-        <button class="mkt-btn" onclick="window.open('https://tinyurl.com/4rc4tkt9','_blank')" onmouseover="this.style.borderColor='#42b549';this.style.background='#f8fdf8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
+        <button class="mkt-btn" onclick="openTracked('https://tinyurl.com/4rc4tkt9','engineer_book_tokopedia_click','tokopedia_button')" onmouseover="this.style.borderColor='#42b549';this.style.background='#f8fdf8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
           <p class="mkt-name" style="color:#42b549">Tokopedia</p>
           <p class="mkt-note">Gratis ongkir · GoPay</p>
         </button>
@@ -699,7 +798,7 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <h2>Satu interview yang lolos<br>bisa mengubah segalanya.</h2>
     <p>Setiap kontrak yang hilang bukan hanya kehilangan pekerjaan — itu 6–9 bulan income dan momentum karir yang tidak bisa diputar ulang. Rp 199.000 untuk menutup celah yang selama ini tidak ada yang ajarkan.</p>
-    <button class="cta-main" style="max-width:380px;margin:0 auto;display:block" onclick="window.open('https://lynk.id/dailylokerpelautmerchandise','_blank')">Pre-Order Sekarang — Rp 199.000 →</button>
+    <button class="cta-main" style="max-width:380px;margin:0 auto;display:block" onclick="openTracked('https://lynk.id/dailylokerpelautmerchandise','engineer_book_lynk_click','lynk_preorder_button')">Pre-Order Sekarang — Rp 199.000 →</button>
     <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:12px">Harga naik 10 Mei 2026 · Buku fisik · Bebas ongkir pre-order</p>
   </div>
 </div>
@@ -711,7 +810,7 @@ img{display:block;max-width:100%}
       <p class="lbl">Pre-order sampai 10 Mei</p>
       <p class="prc">Rp 199.000</p>
     </div>
-    <button class="sticky-btn" onclick="window.open('https://lynk.id/dailylokerpelautmerchandise','_blank')">Pre-Order Sekarang →</button>
+    <button class="sticky-btn" onclick="openTracked('https://lynk.id/dailylokerpelautmerchandise','engineer_book_lynk_click','lynk_preorder_button')">Pre-Order Sekarang →</button>
   </div>
 </div>
 
