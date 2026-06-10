@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran Berhasil — Daily Loker Pelaut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a1628;--gold:#c49a2a;--bg:#eef7ff;--white:#fff;--ink:#1a2a3a;--ink2:#3d5166;--ink3:#7a90a4;--green:#1a6040;--green-bg:#f0f8f4;--red:#b02a2a;--red-bg:#fdf1f1;--orange:#9a5b00;--orange-bg:#fff8e8;--border:#dde4ed}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px}
+.card{max-width:620px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 20px 60px rgba(10,22,40,.08)}
+.badge{display:inline-block;border-radius:999px;padding:6px 12px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;background:var(--green-bg);color:var(--green)}
+h1{font-family:Lora,serif;font-size:30px;color:var(--navy);line-height:1.25;margin-bottom:10px}
+p{font-size:15px;color:var(--ink2);margin-bottom:14px}
+.box{background:var(--green-bg);border:1px solid rgba(26,96,64,.2);border-radius:14px;padding:16px;margin:18px 0}
+.box p{font-size:13px;margin:0;color:var(--green)}
+.steps{margin:18px 0 0 0;padding-left:20px}
+.steps li{font-size:14px;color:var(--ink2);margin:7px 0}
+.btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;padding:13px 17px;margin-top:12px}
+.small{font-size:12px;color:var(--ink3);margin-top:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="badge">Payment Success</span>
+  <h1>Pembayaran berhasil diterima.</h1>
+  <p>Terima kasih. Order kamu sudah masuk ke sistem Daily Loker Pelaut.</p>
+  <div class="box">
+    <p><strong>Order ID:</strong> <span id="orderId">-</span></p>
+  </div>
+  <ol class="steps">
+    <li>Untuk buku fisik, admin akan memproses pengiriman ke alamat yang kamu isi. Order sebelum pukul 17.00 WIB diproses di hari yang sama; setelah itu dikirim keesokan harinya.</li><li>Untuk AI Interview Simulator, access code akan dikirim ke WhatsApp/email.</li><li>Simpan halaman ini atau screenshot Order ID jika diperlukan.</li>
+  </ol>
+  <a class="btn" href="index-merchant-ready.html">Kembali ke halaman produk</a>
+  <p class="small">Halaman ini berada di domain Daily Loker Pelaut dan digunakan sebagai halaman konfirmasi setelah payment flow Midtrans.</p>
+</div>
+<script>
+const qs = new URLSearchParams(window.location.search);
+document.getElementById("orderId").textContent = qs.get("order_id") || qs.get("order_id[]") || "-";
+</script>
+</body>
+</html>

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- DLP GA4 Tracking — Engineer Book Landing Page -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NR05C7B09B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-NR05C7B09B', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    send_page_view: true
+  });
+
+  function trackDLPEvent(eventName, params){
+    if (typeof gtag !== "function") return;
+
+    gtag("event", eventName, Object.assign({
+      event_category: "Engineer Book Landing Page",
+      page_name: "engineer_book_landing",
+      page_title: document.title,
+      page_url: window.location.href,
+      hostname: window.location.hostname,
+      product: "engineer_officer_interview_mastery",
+      transport_type: "beacon"
+    }, params || {}));
+  }
+
+  trackDLPEvent("dlp_engineer_home_loaded", {
+    event_label: "Engineer book landing page loaded"
+  });
+
+  function scrollToOrder(source){
+    trackDLPEvent("engineer_book_order_section_click", {
+      event_label: "Scroll to order section",
+      button_source: source || "unknown"
+    });
+
+    var order = document.getElementById("order");
+    if(order) order.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function openTracked(url, eventName, source){
+    trackDLPEvent(eventName || "engineer_book_external_link_click", {
+      event_label: source || url,
+      button_source: source || "unknown",
+      link_url: url
+    });
+
+    window.open(url, "_blank", "noopener");
+  }
+
+  function startCheckout(productId, source){
+    trackDLPEvent("dlp_checkout_start_click", {
+      event_category: "Checkout",
+      event_label: productId,
+      button_source: source || "unknown",
+      product_id: productId
+    });
+
+    window.location.href = "checkout.html?product=" + encodeURIComponent(productId);
+  }
+
+  (function setupEngineerTracking(){
+    var scrollMarks = {25:false, 50:false, 75:false, 90:false};
+
+    function trackScrollDepth(){
+      var doc = document.documentElement;
+      var body = document.body;
+      var scrollTop = window.scrollY || doc.scrollTop || body.scrollTop || 0;
+      var docHeight = Math.max(
+        body.scrollHeight, doc.scrollHeight,
+        body.offsetHeight, doc.offsetHeight,
+        body.clientHeight, doc.clientHeight
+      );
+      var winHeight = window.innerHeight || doc.clientHeight || 0;
+      var scrollable = Math.max(docHeight - winHeight, 1);
+      var percent = Math.round((scrollTop / scrollable) * 100);
+
+      [25, 50, 75, 90].forEach(function(mark){
+        if(!scrollMarks[mark] && percent >= mark){
+          scrollMarks[mark] = true;
+          trackDLPEvent("engineer_book_scroll_" + mark, {
+            event_category: "Scroll Depth",
+            scroll_depth: mark
+          });
+        }
+      });
+    }
+
+    window.addEventListener("scroll", trackScrollDepth, { passive: true });
+
+    document.addEventListener("click", function(event){
+      var link = event.target.closest ? event.target.closest("a") : null;
+      if(!link) return;
+
+      var href = link.getAttribute("href") || "";
+      var text = (link.innerText || "").trim();
+
+      if(href.startsWith("mailto:")){
+        trackDLPEvent("engineer_book_email_click", {
+          event_category: "Contact",
+          event_label: text || "Email click",
+          link_url: href
+        });
+      }
+
+      if(href.charAt(0) === "#"){
+        trackDLPEvent("engineer_book_internal_anchor_click", {
+          event_category: "Navigation",
+          event_label: text || href,
+          anchor: href
+        });
+      }
+    });
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Mastery untuk Marine Engineer — Daily Loker Pelaut</title>
+<!-- DLP Engineer GA Ready: 2026-05-04 -->
+<meta name="description" content="Panduan lengkap interview dan career strategy untuk Marine Engineer Indonesia. Dari 4E hingga CE. Harga resmi Rp 279.000 — pengiriman diproses setelah pembayaran berhasil.">
+<meta property="og:title" content="Interview Mastery untuk Marine Engineer — Daily Loker Pelaut">
+<meta property="og:description" content="Kamu tahu jawabannya. Tapi begitu ditanya — tiba-tiba nge-blank. Panduan lengkap interview untuk Marine Engineer Indonesia. Checkout resmi sekarang Rp 279.000.">
+<meta property="og:url" content="https://dailylokerpelaut.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daily Loker Pelaut">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Interview Mastery untuk Marine Engineer">
+<meta name="twitter:description" content="Panduan lengkap interview untuk Marine Engineer Indonesia. Harga resmi Rp 279.000.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{color-scheme:light only}body{color-scheme:light only}
+:root{
+  --navy:#0a1628;
+  --navy2:#0d1e35;
+  --navy3:#1e3d6b;
+  --gold:#c49a2a;
+  --gold2:#ddb84a;
+  --gold-bg:#f0f9ff;
+  --cream:#f0f9ff;
+  --white:#ffffff;
+  --ink:#1a2a3a;
+  --ink2:#3d5166;
+  --ink3:#7a90a4;
+  --red:#b02a2a;
+  --red-bg:#fdf1f1;
+  --green:#1a6040;
+  --green-bg:#f0f8f4;
+  --border:#dde4ed;
+  --border2:#c8d4e0;
+}
+body{font-family:'Inter',sans-serif;background:#eef7ff !important;color:#1a2a3a !important;line-height:1.7}
+img{display:block;max-width:100%}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);padding:9px 0;text-align:center}
+.topbar p{font-size:13px;color:rgba(255,255,255,0.55)}
+.topbar strong{color:var(--gold2);font-weight:600}
+
+/* ── HERO ── */
+.hero{background:var(--navy);padding:56px 0 48px;overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.eyebrow-line{width:24px;height:1px;background:var(--gold)}
+.eyebrow-text{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2)}
+.hero h1{font-family:'Lora',serif;font-size:38px;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:20px}
+.hero h1 em{color:var(--gold2);font-style:italic}
+.hero-body{font-size:16px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:24px;max-width:560px}
+.hero-body strong{color:rgba(255,255,255,0.9);font-weight:500}
+
+/* scene quote */
+.scene{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:20px 22px;margin-bottom:28px}
+.scene p{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;font-style:italic}
+.scene p span{color:rgba(255,255,255,0.4);font-style:normal;font-size:13px;display:block;margin-top:8px}
+
+/* price */
+.hero-price{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.price-was{font-size:15px;color:rgba(255,255,255,0.3);text-decoration:line-through}
+.price-now{font-family:'Lora',serif;font-size:46px;font-weight:700;color:var(--gold2);line-height:1}
+.price-tag{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;background:var(--gold);color:var(--navy);padding:4px 12px;border-radius:20px;align-self:center}
+.hero-until{font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:24px}
+
+/* cta */
+.cta-main{display:block;width:100%;background:var(--gold);color:#fff;font-family:'Inter',sans-serif;font-size:19px;font-weight:700;padding:20px 24px;border-radius:10px;border:none;cursor:pointer;text-align:center;text-decoration:none;transition:all .2s;letter-spacing:0.3px;outline:3px solid rgba(255,107,53,0.3);outline-offset:3px}
+.cta-main:hover{background:#e05a25;outline-color:rgba(255,107,53,0.5);transform:translateY(-1px)}
+.cta-soft{display:block;width:100%;background:transparent;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);cursor:pointer;text-align:center;text-decoration:none;margin-top:10px;transition:all .2s}
+.cta-soft:hover{color:rgba(255,255,255,0.8);border-color:rgba(255,255,255,0.35)}
+.hero-sub-note{font-size:12px;color:rgba(255,255,255,0.25);text-align:center;margin-top:10px}
+
+/* ── STATSBAR ── */
+.statsbar{background:#ffffff;border-bottom:1px solid var(--border)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr)}
+.si{padding:16px 10px;text-align:center;border-right:1px solid var(--border)}
+.si:last-child{border:none}
+.sn{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--navy)}
+.sl{font-size:11px;color:#7a90a4;margin-top:2px;line-height:1.4}
+
+/* ── SECTION SHELL ── */
+.sec{padding:48px 0;border-bottom:1px solid var(--border)}
+.sec-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 13px;border-radius:20px;margin-bottom:14px}
+.t-red{background:var(--red-bg);color:var(--red)}
+.t-gold{background:var(--gold-bg);color:#005f73}
+.t-green{background:var(--green-bg);color:var(--green)}
+.t-navy{background:#eef2f8;color:var(--navy2)}
+.sec h2{font-family:'Lora',serif;font-size:26px;font-weight:700;color:#1a2a3a;line-height:1.3;margin-bottom:12px}
+.sec-lead{font-size:15px;color:#3d5166;line-height:1.8}
+
+/* ── PAIN ── */
+.pain-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--border)}
+.pain-item:last-child{border:none}
+.pain-num{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--border2);flex-shrink:0;width:28px;padding-top:2px}
+.pain-content{}
+.pain-title{font-size:15px;font-weight:600;color:#1a2a3a;margin-bottom:4px}
+.pain-desc{font-size:14px;color:#3d5166;line-height:1.7}
+.pain-note{font-size:13px;color:#7a90a4;margin-top:5px;font-style:italic}
+
+/* ── SCENE CALLOUT ── */
+.callout{background:var(--navy);border-radius:10px;padding:22px 24px;margin:24px 0}
+.callout-tag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.callout p{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.8;font-style:italic}
+.callout cite{font-size:12px;color:rgba(255,255,255,0.35);font-style:normal;display:block;margin-top:8px}
+
+/* ── COMPARE ── */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.cmp{border-radius:8px;padding:16px}
+.cmp-bad{background:var(--red-bg);border:1px solid rgba(176,42,42,0.15)}
+.cmp-good{background:var(--green-bg);border:1px solid rgba(26,96,64,0.15)}
+.cmp-label{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:8px}
+.cmp-bad .cmp-label{color:var(--red)}
+.cmp-good .cmp-label{color:var(--green)}
+.cmp p{font-size:13px;line-height:1.7;color:#1a2a3a}
+.cmp-verdict{font-size:12px;color:#7a90a4;text-align:center;margin-top:6px;font-style:italic}
+
+/* ── CHAPTER LIST ── */
+.chapter{background:#ffffff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:10px 0;display:flex;gap:16px}
+.ch-n{font-family:'Lora',serif;font-size:13px;font-weight:700;color:var(--gold);background:var(--gold-bg);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ch-title{font-size:15px;font-weight:600;color:#1a2a3a;margin-bottom:5px}
+.ch-body{font-size:13px;color:#3d5166;line-height:1.7}
+.ch-pill{display:inline-block;font-size:11px;color:#7a90a4;background:#f0f9ff;border:1px solid var(--border);padding:2px 10px;border-radius:10px;margin-top:8px}
+
+/* ── RANK GRID ── */
+.rank-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.rank-card{background:#ffffff;border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.rank-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.rank-title{font-size:14px;font-weight:600;color:#1a2a3a;margin-bottom:3px}
+.rank-note{font-size:12px;color:#7a90a4;line-height:1.5}
+
+/* ── TESTI ── */
+.testi{background:#ffffff;border:1px solid var(--border);border-radius:10px;padding:20px;margin:10px 0}
+.testi-q{font-size:15px;color:#1a2a3a;line-height:1.8;font-style:italic;margin-bottom:14px;padding-left:18px;position:relative}
+.testi-q::before{content:'"';font-family:'Lora',serif;font-size:40px;color:var(--gold);position:absolute;left:0;top:-8px;line-height:1}
+.testi-by{display:flex;align-items:center;gap:10px}
+.testi-av{width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold2);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.testi-name{font-size:13px;font-weight:600;color:#1a2a3a}
+.testi-role{font-size:12px;color:#7a90a4}
+
+/* ── TEAM ── */
+.team-card{background:#ffffff;border:1px solid var(--border);border-radius:12px;padding:22px;margin:12px 0}
+.team-head{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.team-av{width:46px;height:46px;border-radius:10px;background:var(--navy);color:var(--gold2);font-family:'Lora',serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.team-av.light{background:var(--gold-bg);color:var(--navy)}
+.team-name{font-size:15px;font-weight:600;color:#1a2a3a}
+.team-title{font-size:12px;color:#7a90a4;margin-top:2px}
+.team-bio{font-size:14px;color:#3d5166;line-height:1.75}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pill{background:#f0f9ff;border:1px solid var(--border);color:#3d5166;font-size:11px;font-weight:600;padding:3px 12px;border-radius:12px}
+.draft-note{background:var(--gold-bg);border:1.5px dashed var(--gold);border-radius:6px;padding:7px 13px;font-size:11px;font-weight:700;color:#005f73;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+
+/* ── ORDER BOX ── */
+.order-wrap{padding:48px 0}
+.order-card{background:#ffffff;border:2px solid var(--navy);border-radius:14px;padding:30px 24px;position:relative;overflow:hidden}
+.order-ribbon{position:absolute;top:16px;right:-28px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;letter-spacing:0.8px;padding:5px 38px;transform:rotate(35deg);text-transform:uppercase}
+.order-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7a90a4;margin-bottom:4px}
+.order-was{font-size:15px;color:#7a90a4;text-decoration:line-through;margin-bottom:4px}
+.order-price{font-family:'Lora',serif;font-size:50px;font-weight:700;color:var(--navy);line-height:1}
+.order-until{font-size:13px;color:#7a90a4;margin-top:6px;margin-bottom:22px}
+.inc-list{border-top:1px solid var(--border);padding-top:18px;margin-bottom:22px}
+.inc-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.inc-row:last-child{border:none}
+.inc-ck{width:20px;height:20px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.inc-title{font-size:14px;font-weight:600;color:#1a2a3a}
+.inc-sub{font-size:12px;color:#7a90a4;margin-top:2px}
+.deadline{background:var(--red-bg);border:1px solid rgba(176,42,42,0.2);border-radius:8px;padding:12px 16px;text-align:center;margin:10px 0}
+.deadline p{font-size:13px;font-weight:600;color:var(--red)}
+.deadline span{font-weight:400;color:#8b3232}
+
+/* marketplace */
+.mkt-divider{display:flex;align-items:center;gap:12px;margin:18px 0}
+.mkt-divider div{flex:1;height:1px;background:var(--border)}
+.mkt-divider span{font-size:12px;color:#7a90a4;white-space:nowrap}
+.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mkt-btn{background:#ffffff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;transition:all .2s}
+.mkt-name{font-size:13px;font-weight:700;margin-bottom:2px}
+.mkt-note{font-size:12px;color:#7a90a4}
+
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0}
+.faq-q{font-size:15px;font-weight:600;color:#1a2a3a;margin-bottom:7px}
+.faq-a{font-size:14px;color:#3d5166;line-height:1.75}
+
+/* ── FINAL CTA ── */
+.final{background:var(--navy);padding:56px 0;text-align:center;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(0,180,216,0.1)}
+.final h2{font-family:'Lora',serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:14px;line-height:1.35}
+.final p{font-size:15px;color:rgba(255,255,255,0.55);max-width:460px;margin:0 auto 28px;line-height:1.75}
+
+/* ── STICKY ── */
+.sticky{position:fixed;bottom:0;left:0;right:0;background:var(--navy);border-top:1px solid rgba(0,180,216,0.2);padding:11px 20px;z-index:999;transform:translateY(100%);transition:transform .28s ease}
+.sticky.on{transform:translateY(0)}
+.sticky-in{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sticky-l .lbl{font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.5px}
+.sticky-l .prc{font-family:'Lora',serif;font-size:21px;font-weight:700;color:var(--gold2)}
+.sticky-btn{background:var(--gold);color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:11px 22px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap}
+.sticky-btn:hover{background:var(--gold2)}
+
+
+/* ── MERCHANT READY SECTION ── */
+.merchant-card{background:#ffffff;border:1px solid var(--border);border-radius:14px;padding:20px;margin:12px 0;box-shadow:0 10px 30px rgba(10,22,40,0.04)}
+.merchant-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
+.product-card{background:#ffffff;border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.product-card.featured{border:2px solid var(--navy)}
+.product-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;border-radius:999px;padding:4px 10px;margin-bottom:10px;background:#eef2f8;color:var(--navy)}
+.product-badge.gold{background:var(--gold-bg);color:#005f73}
+.product-title{font-family:'Lora',serif;font-size:21px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:6px}
+.product-meta{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#7a90a4;margin-bottom:10px}
+.product-desc{font-size:14px;color:#3d5166;line-height:1.75;margin-bottom:14px}
+.product-price{font-family:'Lora',serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.product-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cta-mini{background:var(--navy);color:#fff;border:none;border-radius:9px;padding:12px 15px;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.cta-mini.gold{background:var(--gold);color:#fff}
+.cta-mini.soft{background:#f0f9ff;color:var(--navy);border:1px solid var(--border)}
+.flow-list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}
+.flow-step{display:flex;gap:12px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-title{font-size:14px;font-weight:700;color:#1a2a3a;margin-bottom:2px}
+.flow-desc{font-size:13px;color:#3d5166;line-height:1.6}
+.trust-strip{background:#f0f8f4;border:1px solid rgba(26,96,64,.18);border-radius:12px;padding:16px;margin-top:18px}
+.trust-strip p{font-size:13px;color:#1a6040;line-height:1.7}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.policy-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
+.policy-box h3{font-size:15px;color:#1a2a3a;margin-bottom:6px}
+.policy-box p{font-size:13px;color:#3d5166;line-height:1.7}
+@media(max-width:480px){.policy-grid{grid-template-columns:1fr}.product-actions{display:grid}.cta-mini{width:100%}}
+
+/* utils */
+.mt12{margin-top:12px}
+.mt20{margin-top:20px}
+.mt24{margin-top:24px}
+.mark{color:#1a2a3a;font-weight:600}
+
+@media(max-width:480px){
+  .hero h1{font-size:28px}
+  .price-now,.order-price{font-size:38px}
+  .compare,.rank-grid,.mkt-grid{grid-template-columns:1fr}
+  .sg{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- MERCHANT READY TOPBAR -->
+<div style="background:#1a6040;padding:10px 0;text-align:center">
+  <p style="font-size:13px;color:#fff;font-weight:600;font-family:Inter,sans-serif">
+    Checkout resmi tersedia · Pembayaran diproses via Midtrans · Order tercatat di sistem admin
+  </p>
+</div>
+<!-- TRUST BAR -->
+<div style="background:#0a1628;padding:10px 0;text-align:center;border-bottom:1px solid rgba(0,180,216,0.2)">
+  <p style="font-size:13px;color:rgba(255,255,255,0.75);font-family:Inter,sans-serif">
+    Produk resmi Daily Loker Pelaut &nbsp;·&nbsp; Buku fisik edukasi pelaut &nbsp;·&nbsp; Support admin setelah pembayaran
+  </p>
+</div>
+
+<!-- ════════════ HERO ════════════ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Tim Daily Loker Pelaut</span>
+    </div>
+
+    <h1>Kamu Tahu Jawabannya.<br>Tapi Begitu Ditanya —<br><em>Tiba-tiba Nge-Blank.</em></h1>
+
+    <p class="hero-body">
+      CV rapi. Sertifikat lengkap. Jam terbang cukup.<br>
+      Tapi waktu Technical Superintendent mulai bertanya,<br>
+      <strong>yang keluar bukan kompetensimu.</strong>
+    </p>
+
+    <div class="scene">
+      <p>
+        "Okay, can you explain how you handle a lube oil high temperature alarm?"<br><br>
+        Tiga detik berlalu. Lima detik.<br>
+        Kamu tahu jawabannya — bukan dari buku, tapi dari tangan yang pernah kotor di bilge.<br>
+        Tapi yang keluar hanya: <em>"Emm… I… the oil… I check the… hmm…"</em>
+      </p>
+      <span>— Skenario yang berulang ribuan kali di ruang interview kapal asing</span>
+    </div>
+
+    <div class="hero-price">
+      <span class="price-now">Rp 279.000</span>
+      <span class="price-tag">Buku Fisik</span>
+    </div>
+    <p class="hero-until">Checkout resmi melalui Midtrans · Pengiriman diproses setelah pembayaran berhasil</p>
+
+    <button class="cta-main" onclick="scrollToOrder('hero_checkout_button')">Checkout Resmi via Midtrans — Rp 279.000 →</button>
+    <a href="#isi" class="cta-soft">Lihat dulu apa isi bukunya →</a>
+    <p class="hero-sub-note">Buku fisik · Data order diisi di website · Pembayaran via Midtrans</p>
+  </div>
+</div>
+
+<!-- STATSBAR -->
+<div class="statsbar">
+  <div class="wrap">
+    <div class="sg">
+      <div class="si">
+        <div class="sn">400+</div>
+        <div class="sl">Pembaca buku<br>pertama</div>
+      </div>
+      <div class="si">
+        <div class="sn">100K+</div>
+        <div class="sl">Pelaut di<br>WA channel</div>
+      </div>
+      <div class="si">
+        <div class="sn">4E→CE</div>
+        <div class="sl">Semua rank<br>tercakup</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ PAIN ════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <span class="sec-tag t-red">Masalah yang tidak diajarkan di akademi</span>
+    <h2>Di akademi kamu belajar cara kerja mesin.<br>Tidak ada yang mengajarimu cara <em>menjelaskannya.</em></h2>
+    <p class="sec-lead">Kamu lulus akademi pelayaran. Paham cara kerja main engine, generator, boiler, dan sistem di kapal dari A sampai Z. Hapal prosedur watchkeeping, STCW, MARPOL luar kepala. Tapi pernahkah ada dosen yang berdiri di depan kelas dan bilang:</p>
+
+    <div class="callout" style="margin:20px 0">
+      <p>"Oke, hari ini kita latihan: gimana caranya jawab kalau Technical Superintendent nanya <em>'What is your action if lube oil pressure drops during sea passage?'</em>"</p>
+      <cite>— Hampir tidak pernah ada di kurikulum akademi manapun</cite>
+    </div>
+
+    <p class="sec-lead" style="margin-bottom:24px">Ini bukan kegagalanmu. Ini celah sistemik. Dan celah ini <span class="mark">mahal sekali harganya</span> di dunia nyata.</p>
+
+    <div class="pain-item">
+      <div class="pain-num">01</div>
+      <div class="pain-content">
+        <p class="pain-title">Blank di depan Technical Superintendent</p>
+        <p class="pain-desc">Pertanyaan yang sudah ratusan kali dikerjakan di atas kapal — tapi begitu ditanya di ruang interview, mulut buka dan kalimat pertama tidak keluar. Ada dua jenis: blank total dan scramble — tahu jawabannya tapi semuanya muncul sekaligus tanpa urutan.</p>
+        <p class="pain-note">Technical Superintendent tidak menguji hafalan. Mereka ingin tahu: kalau orang ini ada di kapalku dan terjadi masalah, apakah dia tahu apa yang harus dilakukan?</p>
+      </div>
+    </div>
+
+    <div class="pain-item">
+      <div class="pain-num">02</div>
+      <div class="pain-content">
+        <p class="pain-title">Freeze saat pindah ke Bahasa Inggris</p>
+        <p class="pain-desc">Fasih ngobrol di mess room — tapi di depan kamera, tiba-tiba kehilangan kata. Bukan masalah kosakata. Otak masuk mode terjemahan real-time: menyusun kalimat Indonesia dulu di kepala, baru ditranslate. Proses ini lambat dan mudah macet saat harus bicara tentang fuel injection timing atau purifier bowl assembly dalam hitungan detik.</p>
+        <p class="pain-note">Perfeksionisme grammar juga membunuh: menunggu kalimat sempurna terbentuk di kepala — padahal grammar imperfect tapi percaya diri jauh lebih meyakinkan daripada diam panjang.</p>
+      </div>
+    </div>
+
+    <div class="pain-item">
+      <div class="pain-num">03</div>
+      <div class="pain-content">
+        <p class="pain-title">Jawaban berantakan meski isi sudah benar</p>
+        <p class="pain-desc">Pengalaman ada, ilmu ada — tapi waktu mulut bergerak, yang keluar cerita yang tidak jelas mau ke mana. Crewing mencatat sesuatu. Lanjut ke kandidat berikutnya.</p>
+        <div class="compare" style="margin-top:14px">
+          <div class="cmp cmp-bad">
+            <p class="cmp-label">✗ Yang sering keluar</p>
+            <p>"Dulu pernah ada masalah di generator, waktu itu kita lagi mau masuk pelabuhan, terus 2/E suruh saya bantu. Saya cek sana-sini, terus akhirnya ketemu masalahnya, sudah diatasi..."</p>
+          </div>
+          <div class="cmp cmp-good">
+            <p class="cmp-label">✓ Yang ingin didengar interviewer</p>
+            <p>"Kapal mendekati Busan, generator No.2 trip. Posisi saya 4/E. Cek alarm panel, konfirmasi over-current trip, lapor ke 3/E. Direstart dalam 12 menit. Kapal masuk tepat waktu."</p>
+          </div>
+        </div>
+        <p class="cmp-verdict">Kontennya sama. Yang didengar interviewer — sangat berbeda.</p>
+      </div>
+    </div>
+
+    <div class="pain-item">
+      <div class="pain-num">04</div>
+      <div class="pain-content">
+        <p class="pain-title">Tidak tahu apa yang sebenarnya dinilai per jabatan</p>
+        <p class="pain-desc">4E dinilai berbeda dengan 2E. 2E dinilai berbeda dengan CE. Setiap jabatan punya "bahasa" sendiri — scope of authority dan scope of accountability yang berbeda. Engineer yang tidak mengerti arena ini menjawab dengan level yang salah.</p>
+        <p class="pain-note">Crewing Officer tidak selalu berlatar engineer. Mereka mengevaluasi dari satu pertanyaan: apakah kandidat ini terlihat siap, komunikatif, dan bisa diandalkan?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ ISI BUKU ════════════ -->
+<div class="sec" id="isi">
+  <div class="wrap">
+    <span class="sec-tag t-gold">Apa yang ada di dalam buku</span>
+    <h2>7 bab utama + Appendix — semua yang kamu butuhkan<br>untuk masuk ruang interview dengan siap.</h2>
+    <p class="sec-lead">Setiap bab dirancang praktis — bukan teori hafalan, tapi cara berpikir yang bisa langsung dipakai di ruang interview.</p>
+
+    <div class="mt20">
+      <div class="chapter">
+        <div class="ch-n">I</div>
+        <div>
+          <p class="ch-title">Kenapa Engineer Indonesia Sering Gagal Interview — Padahal Kompeten</p>
+          <p class="ch-body">Membongkar celah sistemik yang hampir tidak pernah dibahas: bukan soal kemampuan teknis, tapi soal cara menunjukkannya. Termasuk apa yang sebenarnya terjadi di sisi Crewing dan Technical Superintendent saat menilai kandidat.</p>
+          <span class="ch-pill">Fondasi mindset yang benar</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">II</div>
+        <div>
+          <p class="ch-title">Mengenal Arena — Hirarki Engine Room & Ekspektasi Per Jabatan</p>
+          <p class="ch-body">Setiap jabatan punya ekspektasi yang berbeda. 4E yang baru mulai dinilai dari: bisa diperintah, paham prosedur watchkeeping dasar, tahu kapan lapor dan kepada siapa. CE dinilai dari kepemimpinan, budget, dan komunikasi dengan pihak luar kapal. Salah level = salah kesan.</p>
+          <span class="ch-pill">4E · 3E · 2E · CE — masing-masing dibahas</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">III</div>
+        <div>
+          <p class="ch-title">Fondasi Menjawab — Metode STAR & PREP untuk Engineer</p>
+          <p class="ch-body">Dua framework yang bikin jawabanmu keluar rapi dan meyakinkan — bahkan untuk pertanyaan yang belum disiapkan. STAR untuk cerita pengalaman, PREP untuk pertanyaan opini dan motivasi. Semua contoh hadir dalam dua bahasa, masing-masing berdiri sendiri.</p>
+          <span class="ch-pill">Cara berpikir yang bisa dilatih — bukan hafalan</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">IV</div>
+        <div>
+          <p class="ch-title">Pertanyaan Teknis & Behavioral Per Rank</p>
+          <p class="ch-body">Pertanyaan yang benar-benar muncul di interview — dari watch routine hingga keputusan besar. Termasuk cara handle situasi ketika kamu belum pernah langsung mengerjakan sesuatu: bukan bohong, tapi menjawab dengan jujur dan tetap terdengar solid.</p>
+          <span class="ch-pill">Bank soal nyata dari lapangan</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">V</div>
+        <div>
+          <p class="ch-title">Menjawab dalam Bahasa Inggris — Tanpa Freeze, Tanpa Script</p>
+          <p class="ch-body">Bukan soal hafal script atau belajar grammar lebih banyak. Bab ini menjelaskan mengapa otak freeze saat pindah bahasa di bawah tekanan — dan solusinya ada di mengubah cara berpikir, bukan menambah kosakata.</p>
+          <span class="ch-pill">Khusus interview kapal asing</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">VI</div>
+        <div>
+          <p class="ch-title">Situasional, Operasional & Judgment — Skenario yang Tidak Ada di Buku Teks</p>
+          <p class="ch-body">Pertanyaan seperti: "Kamu jaga malam, exhaust temperature naik drastis — apa yang kamu lakukan?" Technical Superintendent tidak menguji hafalan SMS. Yang diukur: cara kerja kepalamu saat kondisi tidak sempurna. Framework ASSESS → ACT → REPORT dan kenapa urutannya tidak boleh dibalik.</p>
+          <span class="ch-pill">Paling sering membuat engineer bagus terdiam</span>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ch-n">VII</div>
+        <div>
+          <p class="ch-title">Eksekusi Interview — Tampil, Bicara, dan Menutup dengan Benar</p>
+          <p class="ch-body">Dari 10 menit sebelum masuk ruangan sampai detik terakhir saat keluar pintu. Termasuk: kenapa datang terlalu awal justru merusak kondisi mental, teknik napas empat-dua-enam yang memperlambat detak jantung secara fisiologis, dan satu kalimat pembuka yang sudah cukup membuka jalur bicara.</p>
+          <span class="ch-pill">End-to-end execution</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ RANK COVERAGE ════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <span class="sec-tag t-navy">Untuk siapa buku ini?</span>
+    <h2>Satu buku, empat level —<br>masing-masing dibahas sesuai porsinya.</h2>
+    <p class="sec-lead">Bab II khusus membahas bahwa ekspektasi per jabatan berbeda. Engineer yang menjawab dengan level yang salah — sekompeten apapun dia — terdengar tidak siap.</p>
+    <div class="rank-grid">
+      <div class="rank-card">
+        <div class="rank-dot" style="background:#4a9eda"></div>
+        <div>
+          <p class="rank-title">Fourth Engineer / WEO</p>
+          <p class="rank-note">Fokus: bisa diperintah, prosedur dasar, tahu kapan lapor — dan cara menjawab pertanyaan sebagai junior tanpa terdengar tidak percaya diri</p>
+        </div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-dot" style="background:#e6a817"></div>
+        <div>
+          <p class="rank-title">Third Engineer</p>
+          <p class="rank-note">Fokus: transisi dari junior, show ownership dan inisiatif tanpa overstepping hirarki yang masih ada di atasmu</p>
+        </div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-dot" style="background:#e05a2a"></div>
+        <div>
+          <p class="rank-title">Second Engineer</p>
+          <p class="rank-note">Fokus: management level — cara bicara tentang keputusan teknis, koordinasi tim, dan akuntabilitas yang lebih luas dari sekadar shift jaga</p>
+        </div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-dot" style="background:#2a2a2a"></div>
+        <div>
+          <p class="rank-title">Chief Engineer</p>
+          <p class="rank-note">Fokus: kepemimpinan, budget, komunikasi luar kapal — cara menjawab sebagai orang yang bertanggung jawab atas seluruh engine department</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <span class="sec-tag t-navy">Dari pembaca buku pertama</span>
+    <h2>Sebelum kamu percaya kami,<br>baca ini dulu.</h2>
+
+    <div class="testi">
+      <p class="testi-q">Saya baca 2 hari sebelum interview di perusahaan Jepang. Yang paling membantu bagian cara jawab pertanyaan situasional — sebelumnya selalu ngawur. Hasilnya dapat kontrak 8 bulan.</p>
+      <div class="testi-by">
+        <div class="testi-av">HS</div>
+        <div>
+          <p class="testi-name">Hendra S.</p>
+          <p class="testi-role">2nd Engineer · Bulk Carrier · Perusahaan Jepang</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi">
+      <p class="testi-q">Saya pikir interview itu soal hafal jawaban teknikal. Ternyata itu yang bikin saya gagal 3 kali. Buku ini ubah cara saya melihat interview dari awal.</p>
+      <div class="testi-by">
+        <div class="testi-av">RM</div>
+        <div>
+          <p class="testi-name">Rizal M.</p>
+          <p class="testi-role">3rd Engineer · Sudah 2 kontrak setelah baca buku</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi">
+      <p class="testi-q">Praktis, tidak bertele-tele, dan relevan dengan kondisi crewing Indonesia. Bukan teori barat yang tidak applicable di lapangan kita.</p>
+      <div class="testi-by">
+        <div class="testi-av">DP</div>
+        <div>
+          <p class="testi-name">Doni P.</p>
+          <p class="testi-role">Chief Engineer · Pembaca setia Daily Loker Pelaut</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ TEAM ════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <span class="sec-tag t-navy">Di balik buku ini</span>
+    <h2>Siapa yang ada di balik buku ini?</h2>
+    <p class="sec-lead">Kami bukan motivator dan bukan konsultan HR. Kami adalah orang yang setiap hari membaca CV pelaut, ngobrol dengan recruiter, dan mendengar langsung cerita dari yang lolos dan yang tidak.</p>
+
+    <div class="team-card mt20">
+      <div class="team-head">
+        <div class="team-av">DLP</div>
+        <div>
+          <p class="team-name">Tim Daily Loker Pelaut</p>
+          <p class="team-title">Penulis & Pengelola Konten</p>
+        </div>
+      </div>
+      <p class="team-bio">Platform informasi karir maritim dengan 100.000+ pelaut Indonesia aktif di WhatsApp channel. Buku pertama kami sudah dibaca lebih dari 400 pelaut dan terbukti membantu mereka masuk ke ruang interview dengan persiapan yang jauh lebih solid. Dari semua feedback yang masuk, satu yang paling sering muncul: <em>"Ada yang khusus buat engineer nggak? Yang masuk lebih dalam ke teknis?"</em> — Buku yang sedang kamu pertimbangkan ini adalah jawabannya.</p>
+      <div class="pill-row">
+        <span class="pill">100K+ WA followers</span>
+        <span class="pill">400+ buku terjual</span>
+        <span class="pill">Direct crewing insight</span>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-head">
+        <div class="team-av light">CR</div>
+        <div>
+          <p class="team-name">Crewing Advisor</p>
+          <p class="team-title">Senior Crewing Manager · 20+ Tahun</p>
+        </div>
+      </div>
+      <p class="team-bio">Lebih dari dua dekade di posisi crewing management untuk perusahaan pelayaran internasional. Telah mereview ribuan aplikasi seafarer dan memimpin ratusan sesi interview — termasuk posisi senior officer. Kontribusinya di buku ini: validasi pola rekrutmen dan perspektif dari sisi panel yang hampir tidak pernah diketahui kandidat.</p>
+      <div class="pill-row">
+        <span class="pill">20+ tahun crewing</span>
+        <span class="pill">International shipping</span>
+        <span class="pill">Senior officer recruitment</span>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-head">
+        <div class="team-av light">LT</div>
+        <div>
+          <p class="team-name">Lilin Tua</p>
+          <p class="team-title">Technical Consultant &amp; Senior Marine Engineering Advisor · 50+ Tahun di Industri</p>
+        </div>
+      </div>
+      <p class="team-bio">Lebih dari 50 tahun di industri maritim Indonesia. Memulai karir sebagai Engineer di berbagai kapal niaga sejak 1970, kemudian mengabdi sebagai pengajar di Indonesian Merchant Marine Academy, Pertamina Maritime Training Centre, dan berbagai lembaga pendidikan pelayaran nasional. Telah menulis 7 buku teknikal tentang permesinan kapal. Saat ini aktif sebagai Technical Consultant dan Senior Marine Engineering Advisor di Poltekpel Sumatera Barat.</p>
+      <div class="pill-row">
+        <span class="pill">50+ tahun di industri maritim</span>
+        <span class="pill">7 buku teknikal diterbitkan</span>
+        <span class="pill">Technical Consultant aktif</span>
+        <span class="pill">Senior Advisor — Poltekpel Sumatera Barat</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════ PRODUK RESMI & CHECKOUT FLOW ════════════ -->
+<div class="sec" id="produk-resmi">
+  <div class="wrap">
+    <span class="sec-tag t-green">Produk resmi</span>
+    <h2>Produk edukasi Daily Loker Pelaut yang bisa dibeli melalui checkout resmi.</h2>
+    <p class="sec-lead">Bagian ini ditambahkan agar produk, harga, cara beli, dan alur pembayaran terlihat jelas. Landing page lama tetap aman; checkout utama kini diarahkan ke domain sendiri dan pembayaran diproses via Midtrans.</p>
+
+    <div class="merchant-grid">
+      <div class="product-card">
+        <span class="product-badge">Buku fisik</span>
+        <p class="product-title">Interview Mastery untuk Pelaut</p>
+        <p class="product-meta">Edukasi pelaut · Buku interview umum</p>
+        <p class="product-desc">Buku latihan interview kerja kapal untuk pelaut Indonesia, berisi panduan menjawab pertanyaan interview, struktur jawaban, contoh jawaban, dan persiapan mental sebelum interview.</p>
+        <p class="product-price">Rp 179.000</p>
+        <div class="product-actions">
+          <button class="cta-mini gold" onclick="startCheckout('interview-mastery-pelaut','official_product_section')">Beli Buku Sekarang</button>
+          <a class="cta-mini soft" href="https://pelaut.dailylokerpelaut.com/" target="_blank" rel="noopener">Lihat detail & FAQ</a>
+        </div>
+      </div>
+
+      <div class="product-card featured">
+        <span class="product-badge gold">Produk halaman ini</span>
+        <p class="product-title">Interview Mastery untuk Marine Engineer</p>
+        <p class="product-meta">Buku fisik · Edukasi teknis engineer</p>
+        <p class="product-desc">Buku interview khusus Marine Engineer. Membantu engineer officer memahami pertanyaan teknis, situational interview, troubleshooting, dan cara menjawab sesuai level jabatan.</p>
+        <p class="product-price">Rp 279.000</p>
+        <div class="product-actions">
+          <button class="cta-mini gold" onclick="startCheckout('marine-engineer-book','official_product_section')">Checkout Resmi via Midtrans</button>
+          <a class="cta-mini soft" href="#isi">Lihat isi buku</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge">Layanan digital</span>
+        <p class="product-title">AI Interview Simulator</p>
+        <p class="product-meta">3 credits · 7 menit per sesi · Written feedback · Berlaku 30 hari</p>
+        <p class="product-desc">Paket latihan interview menggunakan AI Interview Simulator. Setiap credit digunakan untuk 1 sesi interview AI, dilengkapi written feedback setelah sesi selesai.</p>
+        <p class="product-price">Rp 49.000</p>
+        <div class="product-actions">
+          <button class="cta-mini gold" onclick="startCheckout('ai-interview-simulator','official_product_section')">Beli AI Interview Simulator</button>
+          <a class="cta-mini soft" href="#cara-beli">Lihat cara akses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CARA PEMBELIAN ════════════ -->
+<div class="sec" id="cara-beli">
+  <div class="wrap">
+    <span class="sec-tag t-navy">Cara pembelian</span>
+    <h2>Alur checkout dibuat sederhana, jelas, dan tercatat.</h2>
+    <p class="sec-lead">Pembeli tidak perlu berpindah ke Google Form, Lynk.id, atau marketplace untuk melakukan order utama. Data order diisi di website Daily Loker Pelaut, lalu pembayaran diproses melalui Midtrans.</p>
+
+    <div class="flow-list">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div>
+          <p class="flow-title">Pilih produk</p>
+          <p class="flow-desc">Pembeli memilih buku fisik atau AI Interview Simulator dari halaman produk resmi.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div>
+          <p class="flow-title">Isi data checkout</p>
+          <p class="flow-desc">Untuk buku, pembeli mengisi nama, WhatsApp, alamat lengkap, jumlah buku, dan catatan pengiriman. Untuk AI Interview Simulator, pembeli mengisi nama, WhatsApp, email, dan kategori awal bila diperlukan.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div>
+          <p class="flow-title">Cek ringkasan order</p>
+          <p class="flow-desc">Pembeli melihat nama produk, harga, jumlah, dan total pembayaran sebelum klik Bayar Sekarang.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div>
+          <p class="flow-title">Bayar via Midtrans</p>
+          <p class="flow-desc">Pembayaran dilakukan melalui halaman pembayaran Midtrans. Setelah selesai, pembeli diarahkan kembali ke halaman konfirmasi di domain Daily Loker Pelaut.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <p><strong>Checkout aman:</strong> order tercatat di sistem admin, pembayaran diproses via Midtrans, dan pembeli mendapat instruksi setelah payment selesai.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ KEBIJAKAN PRODUK ════════════ -->
+<div class="sec" id="kebijakan">
+  <div class="wrap">
+    <span class="sec-tag t-gold">Pengiriman & kebijakan</span>
+    <h2>Setelah pembayaran berhasil, prosesnya jelas.</h2>
+    <div class="policy-grid">
+      <div class="policy-box">
+        <h3>Pengiriman buku fisik</h3>
+        <p>Order buku diproses setelah pembayaran berhasil. Pembayaran yang selesai sebelum pukul 17.00 WIB akan diproses untuk pengiriman di hari yang sama. Order setelah pukul 17.00 WIB diproses dan dikirim pada keesokan harinya. Pembeli wajib mengisi alamat lengkap dan nomor WhatsApp aktif.</p>
+      </div>
+      <div class="policy-box">
+        <h3>Akses AI Interview Simulator</h3>
+        <p>Access code AI Interview Simulator dikirim melalui WhatsApp/email setelah pembayaran berhasil. Paket berisi 3 interview credits, masing-masing untuk 1 sesi interview AI berdurasi 7 menit, berlaku 30 hari.</p>
+      </div>
+      <div class="policy-box">
+        <h3>Refund / cancel</h3>
+        <p>Pesanan buku dapat dibatalkan sebelum diproses untuk pengiriman. Produk digital hanya dapat direfund bila access code belum digunakan dan terdapat kendala valid yang dapat diverifikasi.</p>
+      </div>
+      <div class="policy-box">
+        <h3>Kontak admin</h3>
+        <p>Untuk kendala order, pembayaran, pengiriman, atau akses digital, pembeli dapat menghubungi Admin Daily Loker Pelaut melalui kontak resmi yang tersedia di website.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════ ORDER ════════════ -->
+<div class="order-wrap" id="order">
+  <div class="wrap">
+    <span class="sec-tag t-green">Checkout resmi tersedia</span>
+    <h2 style="font-family:'Lora',serif;font-size:26px;font-weight:700;color:#1a2a3a;margin-bottom:20px;line-height:1.3">Pesan melalui checkout resmi Daily Loker Pelaut</h2>
+
+    <div class="order-card">
+      <div class="order-ribbon">Best Deal</div>
+      <p class="order-label">Harga Resmi</p>
+      <p class="order-was" style="text-decoration:none;color:#7a90a4">Produk edukasi fisik untuk Marine Engineer</p>
+      <p class="order-price">Rp 279.000</p>
+      <p class="order-until">Order diproses setelah pembayaran berhasil melalui Midtrans</p>
+
+      <div class="inc-list">
+        <div class="inc-row">
+          <div class="inc-ck">✓</div>
+          <div>
+            <p class="inc-title">Buku fisik — Interview Mastery untuk Marine Engineer</p>
+            <p class="inc-sub">7 bab utama + Appendix · 4E hingga CE · Konten teknis terverifikasi · Pengiriman diproses setelah pembayaran berhasil</p>
+          </div>
+        </div>
+        <div class="inc-row">
+          <div class="inc-ck">✓</div>
+          <div>
+            <p class="inc-title">Pengiriman ke seluruh Indonesia</p>
+            <p class="inc-sub">Isi alamat lengkap di halaman checkout agar admin dapat memproses pengiriman dengan benar</p>
+          </div>
+        </div>
+        <div class="inc-row">
+          <div class="inc-ck" style="background:#fff3e0;color:#e65c00">+</div>
+          <div>
+            <p class="inc-title">Bonus: 50+ Pertanyaan Teknis untuk Self-Test <span style="background:#fff3e0;color:#e65c00;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px">Appendix</span></p>
+            <p class="inc-sub">Sudah ada di dalam buku sebagai Appendix — 50+ pertanyaan teknis per rank (4E hingga CE) lengkap dengan arah jawaban yang benar</p>
+          </div>
+        </div>
+        <div class="inc-row">
+          <div class="inc-ck" style="background:#fff3e0;color:#e65c00">+</div>
+          <div>
+            <p class="inc-title">Bonus: Last-Minute Checklist Sebelum Interview <span style="background:#fff3e0;color:#e65c00;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px">PDF</span></p>
+            <p class="inc-sub">Checklist ringkas 1 halaman — bisa dicetak dan dibawa masuk ruang interview untuk pastikan kamu tidak melewatkan satu pun persiapan penting</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="deadline" style="background:#f0f8f4;border-color:rgba(26,96,64,0.2)">
+        <p style="color:#1a6040">Checkout utama dilakukan di website Daily Loker Pelaut <span style="color:#3d5166">— pembayaran diproses melalui Midtrans</span></p>
+      </div>
+      <div style="background:#f0f9ff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:left;margin:8px 0">
+        <p style="font-size:13px;font-weight:600;color:#005f73;font-family:Inter,sans-serif">Setelah pembayaran berhasil, order akan masuk ke sistem admin. Untuk buku fisik, admin memproses pengiriman. Untuk produk digital, access code dikirim melalui WhatsApp/email.</p>
+      </div>
+
+      <!-- PRIMARY: INTERNAL CHECKOUT -->
+      <button class="cta-main" style="margin-top:16px" onclick="startCheckout('marine-engineer-book','engineer_order_primary_button')">Checkout Resmi via Midtrans — Rp 279.000 →</button>
+      <p style="font-size:13px;color:#7a90a4;text-align:center;margin-top:8px">Isi data order di website · Bayar via Midtrans · Kembali ke halaman konfirmasi</p>
+
+      <!-- DIVIDER -->
+      <div class="mkt-divider">
+        <div></div>
+        <span>channel tambahan</span>
+        <div></div>
+      </div>
+
+      <!-- MARKETPLACE AS SECONDARY TRUST -->
+      <div class="mkt-grid">
+        <button class="mkt-btn" onclick="openTracked('https://id.shp.ee/br73rhs','engineer_book_shopee_click','shopee_secondary_button')" onmouseover="this.style.borderColor='#ee4d2d';this.style.background='#fff9f8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
+          <p class="mkt-name" style="color:#ee4d2d">Shopee</p>
+          <p class="mkt-note">Kanal tambahan, bukan checkout utama</p>
+        </button>
+        <button class="mkt-btn" onclick="openTracked('https://tinyurl.com/4rc4tkt9','engineer_book_tokopedia_click','tokopedia_secondary_button')" onmouseover="this.style.borderColor='#42b549';this.style.background='#f8fdf8'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--white)'">
+          <p class="mkt-name" style="color:#42b549">Tokopedia</p>
+          <p class="mkt-note">Kanal tambahan untuk trust pembeli</p>
+        </button>
+      </div>
+      <p style="font-size:12px;color:#7a90a4;text-align:center;margin-top:10px">Untuk approval Midtrans, checkout utama tetap melalui domain Daily Loker Pelaut.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ FAQ ════════════ -->
+<div class="sec" id="faq">
+  <div class="wrap">
+    <span class="sec-tag t-navy">Sebelum kamu ragu</span>
+    <h2>Pertanyaan yang sering masuk</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Apakah ini untuk yang baru mulai atau yang sudah pengalaman?</p>
+      <p class="faq-a">Dua-duanya. Tapi dengan pendekatan berbeda. Kalau kamu fresh graduate, buku ini mengajari cara masuk dengan benar dari awal. Kalau kamu sudah bertahun-tahun di kapal tapi masih sering gagal interview — justru buku ini paling relevan buat kamu. Karena masalahnya bukan pengalaman, tapi cara menyampaikannya.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Saya Deck Officer. Relevan nggak?</p>
+      <p class="faq-a">Konten ini spesifik untuk engine department. Untuk Deck Officer, buku pertama kami — <em>Interview Mastery untuk Pelaut</em> — lebih tepat dan sudah dibaca 400+ pelaut.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Bedanya apa dengan buku pertama?</p>
+      <p class="faq-a">Buku pertama adalah foundation untuk semua seafarers. Buku ini lebih dalam dan spesifik: hanya engine department, pertanyaan teknikal per rank, framework khusus untuk Bahasa Inggris di konteks engine room, dan skenario judgment yang tidak ada di buku teks. Dua buku berbeda untuk dua kebutuhan berbeda.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Apakah jawaban teknis di buku ini akurat?</p>
+      <p class="faq-a">Semua konten teknis sudah diverifikasi oleh Marine Engineer senior dengan pengalaman langsung di kapal puluhan tahun — dan saat ini aktif sebagai Technical Advisor di beberapa perusahaan di Indonesia. Bukan disalin dari internet. Bukan asumsi dari darat. Tujuannya satu: kamu tidak hanya terdengar meyakinkan di interview, tapi juga benar secara teknis.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Kapan buku dikirim?</p>
+      <p class="faq-a">Buku dikirim di hari yang sama setelah checkout/pembayaran berhasil apabila order selesai sebelum pukul 17.00 WIB. Jika pembayaran selesai setelah pukul 17.00 WIB, pengiriman diproses pada keesokan harinya. Konfirmasi order dikirim melalui WhatsApp/email.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Interview saya sudah dekat — sempat tidak kalau order sekarang?</p>
+      <p class="faq-a">Checkout dikirim 1 Mei. Kalau interview kamu sebelum tanggal itu, email kami di <a href="mailto:dailylokerpelaut@gmail.com" style="color:#1a3a6e;font-weight:600">dailylokerpelaut@gmail.com</a> — kami bantu carikan solusi terbaik.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ FINAL CTA ════════════ -->
+<div class="final">
+  <div class="wrap">
+    <h2>Satu interview yang lolos<br>bisa mengubah segalanya.</h2>
+    <p>Setiap kontrak yang hilang bukan hanya kehilangan pekerjaan — itu 6–9 bulan income dan momentum karir yang tidak bisa diputar ulang. Rp 279.000 untuk menutup celah yang selama ini tidak ada yang ajarkan.</p>
+    <button class="cta-main" style="max-width:380px;margin:0 auto;display:block" onclick="startCheckout('marine-engineer-book','final_cta_button')">Checkout Resmi via Midtrans — Rp 279.000 →</button>
+    <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:12px">Buku fisik · Isi data order di website · Pembayaran via Midtrans</p>
+  </div>
+</div>
+
+<!-- ════════════ STICKY ════════════ -->
+<div class="sticky" id="sticky">
+  <div class="sticky-in">
+    <div class="sticky-l">
+      <p class="lbl">Checkout resmi</p>
+      <p class="prc">Rp 279.000</p>
+    </div>
+    <button class="sticky-btn" onclick="startCheckout('marine-engineer-book','sticky_cta_button')">Bayar via Midtrans →</button>
+  </div>
+</div>
+
+<script>
+const sticky=document.getElementById('sticky');
+window.addEventListener('scroll',()=>sticky.classList.toggle('on',scrollY>480));
+</script>
+</body>
+</html>
